@@ -38,30 +38,26 @@ Player.prototype.checkCollisions = function() {
 };
 
 
+Player.prototype.update = function() {
+    if (this.x < 0) {
+        this.x = 0;
+    } else if (this.x > 400) {
+        this.x = 400;
+    } else if (this.y > 400) {
+        this.y = 400;
+    } else if (this.y <= 0) {
+        score += 10;
+        scoreKeeper();
+        this.reset();
+    }
+};
 Player.prototype.reset = function() {
-    var that = this;
-    setTimeout(function() {
-        that.y = 405;
-        that.x = 200;
-    }, 250);
-}
+    this.x = startX;
+    this.y = startY;
+};
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
-
-Player.prototype.handleInput = function(direction) {
-    if (direction === 'up' && this.y > -9) {
-        this.y -= TILE_HEIGHT;
-    } else if (direction === 'down' && player.y < 405) {
-        this.y += TILE_HEIGHT;
-    } else if (direction === 'left' && player.x > -1) {
-        this.x -= TILE_WIDTH;
-    } else if (direction === 'right' && player.x < 400) {
-        this.x += TILE_WIDTH;
-    } else {
-        return;
-    }
 };
 
 Player.prototype.checkWinGame = function() {

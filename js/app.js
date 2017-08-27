@@ -75,7 +75,7 @@ Player.prototype.handleInput = function(pressKey) {
 Player.prototype.checkWinGame = function() {
     if (this.y < 0) {
         setTimeout(function() {
-            if (confirm("Congratulation!!")) {
+            if (confirm("Congratulations!!")) {
                 this.reset();
             }
         }.bind(this), 200);

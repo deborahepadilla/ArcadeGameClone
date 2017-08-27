@@ -50,26 +50,18 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-Player.prototype.handleInput = function(pressKey) {
-    switch (pressKey) {
-        case "left":
-            if (this.x > 0)
-                this.x = this.x - 100;
-            break;
-        case "up":
-            if (this.y > 0)
-                this.y = this.y - 85;
-            break;
-        case "right":
-            if (this.x < 400)
-                this.x = this.x + 100;
-            break;
-        case "down":
-            if (this.y < 400)
-                this.y = this.y + 85;
-            break;
+Player.prototype.handleInput = function(direction) {
+    if (direction === 'up' && this.y > -9) {
+        this.y -= TILE_HEIGHT;
+    } else if (direction === 'down' && player.y < 405) {
+        this.y += TILE_HEIGHT;
+    } else if (direction === 'left' && player.x > -1) {
+        this.x -= TILE_WIDTH;
+    } else if (direction === 'right' && player.x < 400) {
+        this.x += TILE_WIDTH;
+    } else {
+        return;
     }
-    this.checkWinGame();
 };
 
 Player.prototype.checkWinGame = function() {
